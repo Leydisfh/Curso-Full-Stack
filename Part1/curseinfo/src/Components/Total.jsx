@@ -1,9 +1,9 @@
 
 
 
-const Total = ({parts}) =>{ 
+const Total = ({course}) =>{ 
 
-    let totals = parts.reduce((total, part) => total + part.exercises ,0)
+    let totals = course.parts.reduce((total, part) => total + part.exercises ,0)
     return(
     <p>
     Number of exercises {totals}

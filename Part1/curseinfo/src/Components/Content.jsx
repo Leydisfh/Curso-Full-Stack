@@ -1,10 +1,10 @@
 import Part from './Part'
 
-const Content = ({parts}) => {
+const Content = ({course}) => {
 
   return (
     <>
-    {parts.map(element => {
+    {course.parts.map(element => {
       return(
        <Part  key={element.name} 
               name = {element.name} 

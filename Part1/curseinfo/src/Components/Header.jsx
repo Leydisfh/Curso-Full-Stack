@@ -1,4 +1,10 @@
 
 
- const Header = ({course}) => <h1>{course}</h1>
+ const Header = ({course}) => {
+
+    let title = course.name;
+    return(
+    <h1>{title}</h1>
+    )
+}
  export default Header

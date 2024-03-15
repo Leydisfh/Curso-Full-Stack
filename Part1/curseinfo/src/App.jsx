@@ -18,7 +18,7 @@ const App = () => {
                 exercises1={exercises1}
                 exercises2={exercises2}
                 exercises3={exercises3}/>
-     <Total exercises1 ={exercises1}
+      <Total exercises1 ={exercises1}
             exercises2 ={exercises2}
             exercises3={exercises3}/>
     </div>

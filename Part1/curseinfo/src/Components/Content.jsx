@@ -1,18 +1,16 @@
 import Part from './Part'
 
-const Content = ({
-  part1,
-  exercises1,
-  part2,
-  exercises2,
-  part3,
-  exercises3,
-}) => {
+const Content = ({parts}) => {
+
   return (
     <>
-    <Part part1={part1} exercises1={exercises1}/>
-    <Part part2={part2} exercises2={exercises2}/>
-    <Part part3={part3} exercises3={exercises3}/>
+    {parts.map(element => {
+      return(
+       <Part  key={element.name} 
+              name = {element.name} 
+              exercises={element.exercises}/>
+             )
+    })}
     </>
   );
 };

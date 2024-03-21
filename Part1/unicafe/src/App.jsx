@@ -21,12 +21,21 @@ const App = () => {
       <Buttons name={'neutral'}  onClick={()=> setNeutral (neutral + 1)} />
       <Buttons name={'bad'}  onClick={()=> setBad (bad + 1)}/>
       <h2>Statistics</h2>
+      {
+      total === 0 
+      ? 
+      <p>No feedback given</p> 
+      :       
+      <div>
       <Statistics  text={'Good'} value={good}/>
       <Statistics  text={'Neutral'} value={neutral}/>
       <Statistics  text={'Bad'} value={bad}/>
       <Statistics  text={'All'} value={total}/>
       <Statistics  text={'Averange'} value={average}/>
       <Statistics  text={'Positive'} value={positive + '%'}/>
+      </div>
+    }
+
     </div>
   )
 }

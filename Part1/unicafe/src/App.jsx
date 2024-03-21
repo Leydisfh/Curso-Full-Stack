@@ -23,17 +23,14 @@ const App = () => {
       <h2>Statistics</h2>
       {
       total === 0 
-      ? 
-      <p>No feedback given</p> 
-      :       
-      <div>
-      <Statistics  text={'Good'} value={good}/>
-      <Statistics  text={'Neutral'} value={neutral}/>
-      <Statistics  text={'Bad'} value={bad}/>
-      <Statistics  text={'All'} value={total}/>
-      <Statistics  text={'Averange'} value={average}/>
-      <Statistics  text={'Positive'} value={positive + '%'}/>
-      </div>
+      ? <p>No feedback given</p> 
+      :  <Statistics good={good}
+            neutral={neutral}
+            bad={bad} 
+            average={average} 
+            positive={positive}
+            total={total}
+            />
     }
 
     </div>

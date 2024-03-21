@@ -1,7 +1,14 @@
-const Statistics = ({text, value}) => {
+import StatisticLine from "./StatisticLine"
+
+const Statistics = ({good, neutral,bad,total,average, positive }) => {
     return (
         <div>
-            <p>{text}: { value }</p>
+            <StatisticLine  text={'Good'} value={good}/>
+            <StatisticLine  text={'Neutral'} value={neutral}/>
+            <StatisticLine  text={'Bad'} value={bad}/>
+            <StatisticLine  text={'All'} value={total}/>
+            <StatisticLine  text={'Averange'} value={average}/>
+            <StatisticLine  text={'Positive'} value={positive + '%'}/>
         </div>
     )
 }

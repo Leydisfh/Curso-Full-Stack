@@ -13,16 +13,30 @@ function App() {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ];
+  // Estado para guardar la anecdota seleccionada
   const [selected, setSelected] = useState(0);
+  // Estado para guardar los votos
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
+
   
+    // Funcion para votar una anecdota
+    const handleVote = () =>{ 
+     const copy = [...points];
+      copy[selected] += 1
+      setPoints(copy)
+    }
+
+
+  
+    // Funccion para generar una anecdota aleatorio
   const handleClick = () => (
-    console.log('click'),
       setSelected(Math.floor(Math.random()*anecdotes.length) )
   )
   return (
     <>
       {anecdotes[selected]}
-      <br />
+      <p>Has { points[selected]} votes</p>
+      <button onClick={handleVote }>vote</button>
       <button onClick={handleClick}>Next anecdote</button>
     </>
   )

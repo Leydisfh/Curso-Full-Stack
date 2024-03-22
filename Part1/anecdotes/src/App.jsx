@@ -25,19 +25,37 @@ function App() {
       copy[selected] += 1
       setPoints(copy)
     }
-
-
   
     // Funccion para generar una anecdota aleatorio
   const handleClick = () => (
       setSelected(Math.floor(Math.random()*anecdotes.length) )
   )
+
+    // Funcion para encontrar la anecdota con mas votos
+    const mostVoted = () => {
+    let max = 0;
+    let index = 0;
+    for(let i = 0; i < points.length; i++){
+      if(points[i] > max ){
+        max = points[i];
+        index = i;
+      }
+    }
+    return index
+    }
+
+
+
   return (
     <>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <p>Has { points[selected]} votes</p>
       <button onClick={handleVote }>vote</button>
       <button onClick={handleClick}>Next anecdote</button>
+      <h2>Anecdotes with most votes </h2>
+      {anecdotes[mostVoted()]}
+      <p>Has {points[mostVoted()]} votes</p>
     </>
   )
 }

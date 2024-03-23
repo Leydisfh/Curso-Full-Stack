@@ -1,13 +1,12 @@
 import Header from '../Components/Header';
 import Content from '../Components/Content';
-import Total  from '../Components/Total';
 
-const Course =({course}) =>{
+
+const Course =({courses}) =>{
     return (
         <div>
-            <Header course = {course}/>
-            <Content  course = {course}/>
-            <Total course = {course}/> 
+            <Header courses = {courses}/>
+            <Content  courses = {courses}/> 
         </div>
     )
 }

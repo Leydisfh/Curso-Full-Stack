@@ -1,7 +1,7 @@
 
 
- const Header = ({course}) => {
-    let title = course.name;
+ const Header = ({courses}) => {
+    let title = courses.name;
     return(
     <h1>{title}</h1>
     )

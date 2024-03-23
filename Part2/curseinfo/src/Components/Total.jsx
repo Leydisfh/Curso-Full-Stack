@@ -1,14 +1,14 @@
 
 
-
-const Total = ({course}) =>{ 
-
-    let totals = course.parts.reduce((total, part) => total + part.exercises ,0)
+const Total = ({parts}) =>{ 
+    let totals = parts.reduce((sum, part) => sum + part.exercises, 0);
     return(
     <p>
-    Number of exercises {totals}
-</p>
-)}
+         total of {totals} exercises
+    </p> 
+    )
+
+}
 
 
 export default Total

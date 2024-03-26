@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 function App() {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      phone: '123456789'}
   ]) 
-  const [newName, setNewName] = useState('')
+  const [newName, setNewName] = useState('');
+  const [newPhone, setNewPhone] = useState('');
 
 
 // Funciones
@@ -15,10 +17,12 @@ function App() {
   const handleSubmit = (e) =>{
     e.preventDefault();
     const newPerson = {
-          name: newName
+          name: newName,
+          phone: newPhone
     }
     setPersons([...persons, newPerson])
     setNewName('');
+    setNewPhone('');
   }
 
   const isNameRepeated = (name) => {
@@ -34,6 +38,12 @@ function App() {
                 value={newName}
                 onChange={handleChange} 
                 />
+
+        </div>
+        <div>
+          phone:<input type='tel'
+          value={newPhone.toString()}
+          onChange= {(e) => setNewPhone(e.target.value) }  />
         </div>
         <div>
           <button type="submit">add</button>
@@ -45,7 +55,8 @@ function App() {
             ? alert(`${newName} is already added to phonebook`)
             :persons.map(person =>{
             return <li key={person.name}>
-                      {person.name}
+                      {person.name} {' '}
+                      {person.phone}
                   </li>
         })}
         

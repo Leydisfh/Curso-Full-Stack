@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { PersonForm } from './PersonForm';
 
 function App() {
   const [persons, setPersons] = useState([
@@ -15,6 +16,9 @@ function App() {
 // Funciones
   const handleChange = (e) => {
     setNewName(e.target.value)
+  }
+  const handleChangePhone = (e) => {
+    setNewPhone(e.target.value)
   }
 
   const handleSubmit = (e) =>{
@@ -33,8 +37,8 @@ function App() {
     return persons.filter(person => person.name === name).length > 0
   }
 
-  // Filtrando nombres
-  const filteredNames = persons.filter(person => person.name.includes(search));
+ 
+  const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <>
@@ -49,23 +53,13 @@ function App() {
           </p>
       </div>
       <h2>Add a new</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          name: <input type='text' 
-                value={newName}
-                onChange={handleChange} 
-                />
-
-        </div>
-        <div>
-          phone:<input type='tel'
-          value={newPhone.toString()}
-          onChange= {(e) => setNewPhone(e.target.value) }  />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm onSubmit={handleSubmit}
+                  handleChange = {handleChange}
+                  handleChangePhone = {handleChangePhone}
+                  newName = {newName}
+                  newPhone = {newPhone}
+                  />
+      
       <h2>Numbers</h2>
 
       <ul>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { PersonForm } from './PersonForm';
+import {Filter} from './Filter';
+import { Persons } from './Persons';
 
 function App() {
   const [persons, setPersons] = useState([
@@ -36,22 +38,15 @@ function App() {
   const isNameRepeated = (name) => {
     return persons.filter(person => person.name === name).length > 0
   }
-
- 
   const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
+  
 
   return (
     <>
       <h1>Phonebook</h1>
-      <div>
-        <p>
-          filter shown with: 
-          <input type='text'
-          value={search}
-          onChange={ (e) => setSearch(e.target.value)}
-           />
-          </p>
-      </div>
+      <Filter  onChange={ (e) => setSearch(e.target.value)}
+                search={search}/>
+      
       <h2>Add a new</h2>
       <PersonForm onSubmit={handleSubmit}
                   handleChange = {handleChange}
@@ -61,29 +56,13 @@ function App() {
                   />
       
       <h2>Numbers</h2>
-
-      <ul>
-        { search === ''
-        ?
-          isNameRepeated(newName) 
-            ? alert(`${newName} is already added to phonebook`)
-            :persons.map(person =>( 
-            <li 
-              key={person.id}>
-              {person.name} {' '}
-              {person.phone}
-            </li>)
-        )
-        :
-          filteredNames.map(person => (
-            <li 
-              key={person.id}>
-              {person.name} {' '}
-              {person.phone}
-            </li>
-          ))
-      }
-      </ul>
+        <Persons search = {search}
+         newName = {newName} 
+         persons = {persons}
+         isNameRepeated = {isNameRepeated}
+         filteredNames = {filteredNames}
+          />
+      
     </>
   )
 }

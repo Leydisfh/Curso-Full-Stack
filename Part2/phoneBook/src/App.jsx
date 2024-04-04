@@ -17,6 +17,7 @@ function App() {
     })
   },[]);
 
+
 // Funciones
   const handleChange = (e) => {
     setNewName(e.target.value)
@@ -29,12 +30,14 @@ function App() {
     e.preventDefault();
     const newPerson = {
           name: newName,
-          phone: newPhone,
-          id: persons.length + 1
+          phone: newPhone
     }
-    setPersons([...persons, newPerson])
-    setNewName('');
-    setNewPhone('');
+    axios.post('http://localhost:3001/persons', newPerson)
+    .then(response=> {
+      setPersons(persons.concat(response.data))
+      setNewName('');
+      setNewPhone('');
+    })
   }
 
   const isNameRepeated = (name) => {

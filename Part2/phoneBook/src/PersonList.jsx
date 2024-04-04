@@ -1,4 +1,4 @@
-export const Persons = ({search, newName, persons,isNameRepeated,filteredNames } ) =>{
+export const PersonList = ({search, newName, persons,isNameRepeated,filteredNames, removePersone } ) =>{
    
 
     return(
@@ -11,7 +11,8 @@ export const Persons = ({search, newName, persons,isNameRepeated,filteredNames }
             <li 
               key={person.id}>
               {person.name} {' '}
-              {person.phone}
+              {person.phone} {' '}
+              <button onClick={ removePersone(person.id) }>delete</button>
             </li>)
         )
         :
@@ -19,7 +20,7 @@ export const Persons = ({search, newName, persons,isNameRepeated,filteredNames }
             <li 
               key={person.id}>
               {person.name} {' '}
-              {person.phone}
+              {person.phone} 
             </li>
           ))
       }

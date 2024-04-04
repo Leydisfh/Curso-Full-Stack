@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { PersonForm } from './PersonForm';
+import {AddPerson } from './AddPerson';
 import {Filter} from './Filter';
-import { Persons } from './Persons';
+import { PersonList } from './PersonList';
 import phonebookService from './services/phonebook';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
     .then(response => {
       setPersons(response.data)
     })
+    .catch(error => console.log(error))
   },[]);
 
 
@@ -44,6 +45,19 @@ function App() {
     return persons.filter(person => person.name === name).length > 0
   }
   const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
+ 
+
+  const removePersone = (id) => {
+    return () => {
+      const person = persons.find(person => person.id === id)
+      if(window.confirm(`Do you really want to delete ${ person.name }?`))
+      phonebookService.remove(id)
+      .then(response => {
+        setPersons(persons.filter(person => person.id !== id))
+      })
+      .catch(error => console.log(error))
+    }
+  }
   
 
   return (
@@ -53,7 +67,7 @@ function App() {
                 search={search}/>
       
       <h2>Add a new</h2>
-      <PersonForm onSubmit={handleSubmit}
+      <AddPerson onSubmit={handleSubmit}
                   handleChange = {handleChange}
                   handleChangePhone = {handleChangePhone}
                   newName = {newName}
@@ -61,11 +75,12 @@ function App() {
                   />
       
       <h2>Numbers</h2>
-        <Persons search = {search}
+        <PersonList search = {search}
          newName = {newName} 
          persons = {persons}
          isNameRepeated = {isNameRepeated}
          filteredNames = {filteredNames}
+          removePersone = {removePersone }
           />
       
     </>

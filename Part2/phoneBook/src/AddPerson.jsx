@@ -1,4 +1,4 @@
-export const PersonForm = ({onSubmit, newName,handleChange,newPhone,handleChangePhone }) => (
+export const AddPerson = ({onSubmit, newName,handleChange,newPhone,handleChangePhone }) => (
     
     <form onSubmit={onSubmit}>
         <div>

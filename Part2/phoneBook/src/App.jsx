@@ -53,7 +53,7 @@ function App() {
       if(window.confirm(`Do you really want to delete ${ person.name }?`))
       phonebookService.remove(id)
       .then(response => {
-        setPersons(persons.filter(person => person.id !== id))
+        setPersons(prevPersons => prevPersons.filter(person => person.id !== id))
       })
       .catch(error => console.log(error))
     }

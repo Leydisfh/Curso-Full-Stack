@@ -10,6 +10,9 @@ function App() {
   const [newPhone, setNewPhone] = useState('');
   const [search, setSearch] = useState('');
 
+  const existingPersons = persons.find(person => person.name === newName);
+  const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
+  
   useEffect(() => {
     phonebookService.getAll()
     .then(response => {
@@ -17,9 +20,11 @@ function App() {
     })
     .catch(error => console.log(error))
   },[]);
+  
+  
+  // Funciones
+  const isNameRepeated = (name) => persons.filter(person => person.name === name).length > 0
 
-
-// Funciones
   const handleChange = (e) => {
     setNewName(e.target.value)
   }
@@ -33,19 +38,29 @@ function App() {
           name: newName,
           phone: newPhone
     }
-    phonebookService.create(newPerson)
-    .then(response=> {
-      setPersons(persons.concat(response.data))
-      setNewName('');
-      setNewPhone('');
-    })
+  
+    if(existingPersons){
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const id = existingPersons.id;
+        const changedPerson = {...existingPersons, phone: newPhone}
+        phonebookService.update(id, changedPerson)
+        .then(response => {
+          setPersons(persons.map(person =>( person.id !== id ? person : response.data)))
+          setNewName('');
+          setNewPhone('');
+        })
+        .catch(error => console.log(error))
+      }
+    }else{
+      phonebookService.create(newPerson)
+      .then(response=> {
+        setPersons(persons.concat(response.data))
+        setNewName('');
+        setNewPhone('');
+      })
+      .catch(error => console.log(error))
+    }
   }
-
-  const isNameRepeated = (name) => {
-    return persons.filter(person => person.name === name).length > 0
-  }
-  const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
- 
 
   const removePersone = (id) => {
     return () => {
@@ -58,7 +73,9 @@ function App() {
       .catch(error => console.log(error))
     }
   }
-  
+ 
+
+
 
   return (
     <>

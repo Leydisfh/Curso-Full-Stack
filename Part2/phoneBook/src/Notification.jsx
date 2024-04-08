@@ -9,12 +9,22 @@ export const Notification = ({ message }) => {
         marginBottom: 10
     
     }
+    const errorStyle ={
+        color:'red',
+        background:'lightgrey',
+        fontSize:20,
+        borderStyle:'solid',
+        borderColor:'red',
+        borderRadius:5,
+        padding:10,
+    
+    }
 
     if(message === null){
         return null
     }
     return(
-        <div style={notificationStyle}>
+        <div style={message.includes('Error') ? errorStyle : notificationStyle}>
             {message}
         </div>
     )

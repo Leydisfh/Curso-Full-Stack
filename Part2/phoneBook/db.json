@@ -1,29 +1,9 @@
 {
   "persons": [
     {
-      "id": "ca42",
-      "name": "roberto",
-      "phone": "94373495"
-    },
-    {
-      "name": "lola",
-      "phone": "",
-      "id": "059b"
-    },
-    {
-      "id": "dc4a",
-      "name": "maria",
-      "phone": ""
-    },
-    {
       "id": "778b",
       "name": "lolita",
       "phone": "23"
-    },
-    {
-      "id": "5de9",
-      "name": "carlo",
-      "phone": ""
     },
     {
       "id": "d5df",

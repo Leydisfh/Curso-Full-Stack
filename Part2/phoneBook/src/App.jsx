@@ -13,6 +13,7 @@ function App() {
   const [newPhone, setNewPhone] = useState('');
   const [search, setSearch] = useState('');
   const [message, setMessage] = useState( null );
+  const [error, setError] = useState(null);
 
 
 
@@ -59,7 +60,13 @@ function App() {
             setMessage(null)
           },5000)
         })
-        .catch(error => console.log(error))
+        .catch(error =>{
+          setError(`Error, information of ${newName} has already been removed from server`)
+          setTimeout(() => {
+            setError(null)
+          },5000)
+          setPersons(persons.filter(person => person.id !== id))
+        })
       }
     }else{
       phonebookService.create(newPerson)
@@ -95,6 +102,7 @@ function App() {
     <>
       <h1>Phonebook</h1>
       <Notification  message={message}/>
+      <Notification  message={error} />
       <Filter  onChange={ (e) => setSearch(e.target.value)}
                 search={search}/>
       

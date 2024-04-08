@@ -3,12 +3,18 @@ import {AddPerson } from './AddPerson';
 import {Filter} from './Filter';
 import { PersonList } from './PersonList';
 import phonebookService from './services/phonebook';
+import { Notification } from './Notification';
+
+
 
 function App() {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('');
   const [newPhone, setNewPhone] = useState('');
   const [search, setSearch] = useState('');
+  const [message, setMessage] = useState( null );
+
+
 
   const existingPersons = persons.find(person => person.name === newName);
   const filteredNames = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()));
@@ -48,6 +54,10 @@ function App() {
           setPersons(persons.map(person =>( person.id !== id ? person : response.data)))
           setNewName('');
           setNewPhone('');
+          setMessage(`Phone number of ${newName} has been updated`)
+          setTimeout(() => {
+            setMessage(null)
+          },5000)
         })
         .catch(error => console.log(error))
       }
@@ -57,9 +67,13 @@ function App() {
         setPersons(persons.concat(response.data))
         setNewName('');
         setNewPhone('');
+        setMessage(`Added ${newName}`)
+        setTimeout(() => {
+          setMessage(null)
+        },5000)
       })
-      .catch(error => console.log(error))
-    }
+      .catch(error =>console.log(error)) 
+}
   }
 
   const removePersone = (id) => {
@@ -80,6 +94,7 @@ function App() {
   return (
     <>
       <h1>Phonebook</h1>
+      <Notification  message={message}/>
       <Filter  onChange={ (e) => setSearch(e.target.value)}
                 search={search}/>
       

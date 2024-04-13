@@ -6,5 +6,4 @@ const getCountries = () => {
     return axios.get(`${url}/all`)
 }
 
-
 export default { getCountries }

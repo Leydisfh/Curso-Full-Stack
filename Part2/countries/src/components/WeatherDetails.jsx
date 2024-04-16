@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react"
-import data from './services/weather'
+import data from '../services/weather'
 
 const WeatherDetails = ({ country, weather }) => {
   

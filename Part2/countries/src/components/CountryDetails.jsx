@@ -1,4 +1,4 @@
-import  data from './services/weather';
+import  data from '../services/weather';
 import { useEffect, useState } from 'react';  
 import WeatherDetails from './WeatherDetails';
 import Error from './Error';

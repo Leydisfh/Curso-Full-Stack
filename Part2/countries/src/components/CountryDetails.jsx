@@ -1,11 +1,11 @@
 import  data from '../services/weather';
 import { useEffect, useState } from 'react';  
 import WeatherDetails from './WeatherDetails';
-import Error from './Error';
+
 
 const CountryDetails = ({ country}) => {
     const [weather, setWeather] = useState(null);
-    const [error, setError] = useState(null);
+
    
     // get weather data
     useEffect(()=>{
@@ -13,14 +13,11 @@ const CountryDetails = ({ country}) => {
     .then(data=>{
       setWeather(data.data)
     })
-    .catch( () => setError('Weather data not available'))
+    .catch( () =>console.log('Weather data not available'))
     },[country.capital])
 
    return(
     <>
-    <div>
-        {error && <Error error={error}/>}
-        </div>
      <li key={country.cca3}>
         <h2>{country.name.common}</h2>
         <p>capital {country.capital[0]}</p>

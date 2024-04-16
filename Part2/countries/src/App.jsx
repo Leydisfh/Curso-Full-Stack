@@ -1,12 +1,15 @@
 
 import { useEffect, useState } from 'react'
 import  data from './services/countries'
-import CountryDetails from './CountryDetails'
+import CountryDetails from './components/CountryDetails';
+import Filtered from './components/Filtered.jsx';
 
 
 function App() {
 const [search, setSearch] = useState('')
-const [countries, setCountries] = useState(null)
+const [countries, setCountries] = useState(null);
+const [show, setShow] = useState(false)
+
 
 const handleChange = (e) => {
   setSearch(e.target.value)
@@ -23,7 +26,8 @@ if(!countries ){
   return null 
 }
 
-const filteredCountries = countries.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()))
+const filteredCountries = countries.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()));
+
 
 const showInfo = ()=>{
   if(filteredCountries.length>10){
@@ -33,16 +37,15 @@ const showInfo = ()=>{
     return <CountryDetails country={filteredCountries[0]} />
   }
   else{
-    return filteredCountries.map(country => <li key={country.cca3}>
-    {country.name.common}
-    <button>show</button> 
-    </li>)
+    return filteredCountries.map(country => 
+      <Filtered key={country.name.common} country={country.name.common} handleShow={handleShow(country)} />
+      )
   }
 }
+const handleShow = (country) => () => {
+    setShow(country.name.common)
+}
 
-// mi api key es 68b4205ed8ea81fbeed7c0c86b48cb86
-
-// Me falta el ejercicio 2.19
   return (
     <>
     <label>
@@ -50,8 +53,9 @@ const showInfo = ()=>{
     </label>
     <ul>
       { showInfo()}
+      {show && <CountryDetails country={countries.find(country => country.name.common === show)} />}
     </ul>
-  
+ 
     </>
   )
   

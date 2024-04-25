@@ -1,0 +1,19 @@
+{
+  "persons": [
+    {
+      "id": "778b",
+      "name": "lolita",
+      "phone": "23"
+    },
+    {
+      "id": "d5df",
+      "name": "roberta",
+      "phone": ""
+    },
+    {
+      "id": "ee46",
+      "name": "alejandro",
+      "phone": ""
+    }
+  ]
+}

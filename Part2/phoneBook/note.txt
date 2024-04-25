@@ -1,0 +1,40 @@
+const handleSubmit = (e) =>{
+    e.preventDefault();
+    
+    const newPerson = {
+        name: newName,
+        phone: newPhone
+    }
+
+    // Comprobar si el nombre ya está en la lista
+    const existingPerson = persons.find(person => person.name === newPerson.name);
+
+    if (existingPerson) {
+        // Si el nombre ya existe, preguntar al usuario si desea reemplazar el número de teléfono
+        const confirmUpdate = window.confirm(`${newPerson.name} ya está en la lista de contactos. ¿Desea reemplazar el número de teléfono?`);
+
+        if (confirmUpdate) {
+            // Si el usuario confirma, actualizar el número de teléfono utilizando el servicio correspondiente
+            phonebookService.update(existingPerson.id, newPerson)
+                .then(response => {
+                    // Actualizar la lista de personas con el número de teléfono actualizado
+                    setPersons(persons.map(person => person.id === existingPerson.id ? response.data : person));
+                    // Limpiar los campos de entrada (sobran las siguientes líneas)
+                    // setNewName('');
+                    // setNewPhone('');
+                })
+                .catch(error => console.log(error));
+        }
+    } else {
+        // Si el nombre no existe, agregar el nuevo contacto utilizando el servicio correspondiente
+        phonebookService.create(newPerson)
+            .then(response=> {
+                // Agregar el nuevo contacto a la lista de personas
+                setPersons(persons.concat(response.data));
+                // Limpiar los campos de entrada (sobran las siguientes líneas)
+                // setNewName('');
+                // setNewPhone('');
+            })
+            .catch(error => console.log(error));
+    }
+}

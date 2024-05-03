@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json())
 
 let persons = [
     { 
@@ -24,6 +25,13 @@ let persons = [
     }
 ]
 
+const generateId = () => {
+  const maxId = persons.length > 0
+  ? Math.max(...persons.map(n => n.id))
+  : 0
+  return maxId + 1
+}
+
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
@@ -45,6 +53,22 @@ app.get('/api/persons/:id', (req, resp)=>{
   else{
     resp.status(404).end()
     }
+})
+
+app.post('/api/persons', (req, resp)=>{
+  const body = req.body;
+  if(!body.name || !body.number){
+    return resp.status(400).json({
+      error:'name or number missing'
+    })
+  }
+  const person ={
+    name: body.name,
+    number: body.number,
+    id: generateId()
+  }
+  persons = persons.concat(person)
+  resp.json(person)
 })
 
 

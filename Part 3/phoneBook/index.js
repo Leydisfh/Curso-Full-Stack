@@ -1,4 +1,6 @@
 const express = require('express');
+const morgan = require('morgan')
+
 const app = express();
 app.use(express.json())
 
@@ -31,7 +33,10 @@ const generateId = () => {
   : 0
   return maxId + 1
 }
+// Middleware
+app.use(morgan('tiny'))
 
+// Rutas de la aplicación
 app.get('/', (req, res) => {
     res.send('Hello World');
 });

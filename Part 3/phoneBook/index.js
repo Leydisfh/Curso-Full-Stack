@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan')
-const corse = require('cors')
 
 const app = express();
 
@@ -35,11 +34,11 @@ const generateId = () => {
   return maxId + 1
 }
 // Middleware
-// usamos morgan para ver las peticiones que llegan al servidor
 morgan.token('body', (req, res)=> JSON.stringify(req.body))
 app.use(morgan(':method : url: status :res[content-length] - :response-time ms :body'))
-app.use(corse()) // Permite que el servidor acepte peticiones de cualquier origen
-app.use(express.json()) // Se encarga de parsear el body de las peticiones POST y PUT
+
+app.use(express.json())
+
 
 // Rutas de la aplicación
 app.get('/', (req, res) => {

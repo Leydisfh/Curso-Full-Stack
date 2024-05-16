@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan')
-
 const app = express();
 
 
@@ -38,7 +37,7 @@ morgan.token('body', (req, res)=> JSON.stringify(req.body))
 app.use(morgan(':method : url: status :res[content-length] - :response-time ms :body'))
 
 app.use(express.json())
-
+app.use(express.static('dist'))
 
 // Rutas de la aplicación
 app.get('/', (req, res) => {
@@ -92,7 +91,8 @@ app.delete('/api/persons/:id', (req, resp)=>{
   resp.status(204).end()
 })
 
-const port = 3001
+const port = process.env.PORT || 3001;
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
